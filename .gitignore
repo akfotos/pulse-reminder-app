@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.*
+!.env.example
+.vercel/
+*.db-wal
+*.db-shm
+*.db
+*.db-journal
+*.tsbuildinfo

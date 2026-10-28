@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+model Reminder {
+  id String @id @default(cuid())
+  title String
+  category String
+  date DateTime
+  recurrence String @default("Once")
+  intervalDays Int?
+  notes String @default("")
+  reference String @default("")
+  alerts String @default("30,7,0")
+  archived Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Settings {
+  id String @id @default("default")
+  email String @default("")
+  emailEnabled Boolean @default(false)
+  weeklyDigest Boolean @default(false)
+  displayName String @default("My workspace")
+  workspaceName String @default("Personal space")
+  digestDay Int @default(1)
+  includeNotes Boolean @default(true)
+  defaultCategory String @default("Birthday")
+  defaultAlerts String @default("30,7,0")
+  documentWarningDays Int @default(180)
+  dateFormat String @default("MMM d, yyyy")
+  weekStartsOn Int @default(1)
+  theme String @default("system")
+  density String @default("comfortable")
+  reduceMotion Boolean @default(false)
+  showAnalytics Boolean @default(true)
+}
+
+model Delivery {
+  id String @id @default(cuid())
+  key String @unique
+  sentAt DateTime @default(now())
+}
