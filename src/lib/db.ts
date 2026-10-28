@@ -6,6 +6,10 @@ export const db = globalDb.prisma ?? new PrismaClient();
 if (process.env.NODE_ENV !== 'production') globalDb.prisma = db;
 
 export async function initialize() {
+  if (process.env.NODE_ENV === 'production') {
+    await db.settings.upsert({ where: { id: 'default' }, create: { id: 'default' }, update: {} });
+    return;
+  }
   if (!globalDb.seed) globalDb.seed = (async () => {
     const settings = await db.settings.findUnique({ where: { id: 'default' } });
     if (settings) return;

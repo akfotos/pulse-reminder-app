@@ -1,1 +1,1 @@
-{"crons":[{"path":"/api/cron","schedule":"0 8 * * *"}]}
+{"buildCommand":"npm run vercel-build","regions":["lhr1"],"crons":[{"path":"/api/cron","schedule":"0 8 * * *"}]}

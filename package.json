@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
+    "vercel-build": "prisma generate --schema prisma/production/schema.prisma && prisma migrate deploy --schema prisma/production/schema.prisma && next build",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/lib/reminders.test.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "postinstall": "prisma generate"
@@ -39,6 +41,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.1.18",
+    "tsx": "4.20.6",
     "typescript": "^5.9.3"
   }
 }

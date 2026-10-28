@@ -24,11 +24,11 @@ export async function GET(request: Request) {
   try {
     if (settings.emailEnabled) for (const reminder of reminders) {
       const days = daysUntil(reminder, now);
-      if (reminder.alerts.split(',').map(Number).includes(days)) await deliver(`${reminder.id}-${day}-${days}`, `${reminder.title} · ${days === 0 ? 'Today' : `in ${days} days`}`, `${reminder.title}\n${reminder.category} · ${days === 0 ? 'Due today' : `Due in ${days} days`}\n\n${reminder.notes}`);
+      if (reminder.alerts.split(',').map(Number).includes(days)) await deliver(`${reminder.id}-${day}-${days}`, `${reminder.title} · ${days === 0 ? 'Today' : `in ${days} days`}`, `${reminder.title}\n${reminder.category} · ${days === 0 ? 'Due today' : `Due in ${days} days`}${settings.includeNotes ? `\n\n${reminder.notes}` : ''}`);
     }
-    if (settings.weeklyDigest && now.getUTCDay() === 1) {
+    if (settings.weeklyDigest && now.getUTCDay() === settings.digestDay) {
       const upcoming = reminders.filter(r => daysUntil(r, now) >= 0 && daysUntil(r, now) <= 7);
-      await deliver(`digest-${day}`, 'Your week ahead · PulseRemind', upcoming.length ? upcoming.map(r => `${r.title} — in ${daysUntil(r, now)} days`).join('\n') : 'A little breathing room. You have no reminders due in the next 7 days.');
+      await deliver(`digest-${day}`, 'Your week ahead · PulseRemind', upcoming.length ? `${settings.displayName}, here is your week ahead:\n\n${upcoming.map(r => `${r.title} — in ${daysUntil(r, now)} days${settings.includeNotes && r.notes ? `\n${r.notes}` : ''}`).join('\n\n')}` : 'A little breathing room. You have no reminders due in the next 7 days.');
     }
     return NextResponse.json({ sent });
   } catch { return NextResponse.json({ error: 'Email delivery failed. The next run can safely retry.' }, { status: 502 }); }
