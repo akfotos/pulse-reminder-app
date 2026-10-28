@@ -3,7 +3,7 @@
 - Stack: Next.js 15 App Router, React 19, TypeScript, Tailwind CSS 4, Radix Dialog, Lucide, Prisma 6. Local development uses SQLite; Vercel production uses Neon PostgreSQL.
 - Install with `npm install`; initialize the local database with `npm run db:push`; start with `npm run dev` on port 3000. Set local `DATABASE_URL` to `file:./pulse.db`.
 - Verification: `npm test` (nine date/recurrence/analytics/settings tests), `npm run typecheck`, `npm run build`, and `npm audit --omit=dev`.
-- Production requires `APP_USERNAME` and `APP_PASSWORD` for the single-user HTTP Basic authentication middleware. Serve production traffic over HTTPS. Development does not require credentials. Do not print or commit credentials.
+- The workspace is public at the user's request. No username/password is required; reminder and settings APIs are also public. `APP_USERNAME` and `APP_PASSWORD` are unused. The cron route still requires `CRON_SECRET`. Do not print or commit credentials.
 - Vercel project: `akfotos/pulse-reminder-app`; connected GitHub repository: `akfotos/pulse-reminder-app`. Neon free resource: `pulse-reminder-db`, London region.
 - Production schema is `prisma/production/schema.prisma`. `npm run vercel-build` generates the PostgreSQL client, applies versioned migrations using `DATABASE_URL_UNPOOLED`, and builds Next.js. Runtime traffic uses pooled `DATABASE_URL`. Never use destructive database reset commands for deployment.
 - Local schema is `prisma/schema.prisma`; the database is `prisma/pulse.db`. After running the production generator locally, run `npm run db:generate` to restore the SQLite client before starting local development.
