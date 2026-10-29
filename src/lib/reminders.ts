@@ -3,10 +3,12 @@ import { z } from 'zod';
 
 export const categories = ['Birthday', 'Document', 'Health', 'Custom'] as const;
 export const documentTypes = ['Passport', "Driver's License", 'State ID', 'National ID', 'Visa', 'Certification', 'Insurance', 'Vehicle Registration', 'Other'] as const;
+export const healthTypes = ['Annual Physical', 'Dental Cleaning', 'Eye Exam', 'Vaccination', 'Medication Refill', 'Blood Work', 'Screening', 'Therapy', 'Other'] as const;
 export const reminderSchema = z.object({
   title: z.string().trim().min(1).max(200),
   category: z.enum(categories),
   documentType: z.string().max(60).default(''),
+  healthType: z.string().max(60).default(''),
   person: z.string().max(100).default(''),
   date: z.iso.date(),
   recurrence: z.enum(['Once', 'Yearly', 'Custom']),

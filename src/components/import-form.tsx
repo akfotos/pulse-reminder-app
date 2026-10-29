@@ -3,8 +3,8 @@ import { useRef, useState } from 'react';
 import { UploadCloud, FileSpreadsheet, ArrowRight, Check, LoaderCircle } from 'lucide-react';
 import { categories, reminderSchema, type ReminderInput } from '@/lib/reminders';
 
-const fields = ['title', 'category', 'documentType', 'person', 'date', 'recurrence', 'intervalDays', 'notes'] as const;
-const aliases = { title: /name|title/i, category: /category/i, documentType: /document|license|passport|id type|doc.*type/i, person: /person|owner|holder|belongs/i, date: /date|expiry|birthday|expir/i, recurrence: /recurrence|repeat/i, intervalDays: /interval|every.*days/i, notes: /notes|gift|description/i };
+const fields = ['title', 'category', 'documentType', 'healthType', 'person', 'date', 'recurrence', 'intervalDays', 'notes'] as const;
+const aliases = { title: /name|title/i, category: /category/i, documentType: /document|license|passport|id type|doc.*type/i, healthType: /health|physical|dental|vaccin|exam/i, person: /person|owner|holder|belongs|patient/i, date: /date|expiry|birthday|expir|appt/i, recurrence: /recurrence|repeat/i, intervalDays: /interval|every.*days/i, notes: /notes|gift|description/i };
 export function ImportForm({ onImport }: { onImport: (rows: ReminderInput[]) => Promise<void> }) {
   const fileInput = useRef<HTMLInputElement>(null);
   const [data, setData] = useState<{ headers: string[]; rows: string[][] }>();
@@ -30,7 +30,7 @@ export function ImportForm({ onImport }: { onImport: (rows: ReminderInput[]) => 
       const raw = get('date');
       const parsedDate = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : !isNaN(Date.parse(raw)) ? new Date(raw).toISOString().slice(0, 10) : raw;
       const category = categories.find(c => c.toLowerCase() === get('category').toLowerCase().replace(/s$/, '')) || (get('category').toLowerCase().includes('birth') ? 'Birthday' : 'Custom');
-      return { title: get('title'), category, documentType: get('documentType'), person: get('person'), date: parsedDate, recurrence: (get('recurrence').toLowerCase() === 'yearly' ? 'Yearly' : get('recurrence').toLowerCase() === 'custom' ? 'Custom' : 'Once') as ReminderInput['recurrence'], intervalDays: Number(get('intervalDays')) || null, notes: get('notes'), reference: '', alerts: '30,7,0' };
+      return { title: get('title'), category, documentType: get('documentType'), healthType: get('healthType'), person: get('person'), date: parsedDate, recurrence: (get('recurrence').toLowerCase() === 'yearly' ? 'Yearly' : get('recurrence').toLowerCase() === 'custom' ? 'Custom' : 'Once') as ReminderInput['recurrence'], intervalDays: Number(get('intervalDays')) || null, notes: get('notes'), reference: '', alerts: '30,7,0' };
     });
     setPreview(rows);
   }

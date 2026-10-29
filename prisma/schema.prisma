@@ -12,6 +12,7 @@ model Reminder {
   title String
   category String
   documentType String @default("")
+  healthType String @default("")
   person String @default("")
   date DateTime
   recurrence String @default("Once")

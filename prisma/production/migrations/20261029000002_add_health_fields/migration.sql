@@ -1,0 +1,1 @@
+ALTER TABLE "Reminder" ADD COLUMN "healthType" TEXT NOT NULL DEFAULT '';
