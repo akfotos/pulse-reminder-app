@@ -6,7 +6,7 @@ import { analyzeReminders } from './analytics';
 import { settingsSchema } from './settings';
 
 const today = new Date('2026-10-28T12:00:00');
-const makeReminder = (values: Partial<Reminder> = {}): Reminder => ({ id: 'test', title: 'Test reminder', category: 'Custom', date: '2026-10-28', recurrence: 'Once', notes: '', reference: '', alerts: '30,7,0', ...values });
+const makeReminder = (values: Partial<Reminder> = {}): Reminder => ({ id: 'test', title: 'Test reminder', category: 'Custom', documentType: '', person: '', date: '2026-10-28', recurrence: 'Once', notes: '', reference: '', alerts: '30,7,0', ...values });
 
 test('yearly reminders roll forward without becoming overdue', () => {
   const reminder = makeReminder({ date: '1990-10-27', recurrence: 'Yearly' });

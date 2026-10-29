@@ -12,6 +12,8 @@ model Reminder {
   id String @id @default(cuid())
   title String
   category String
+  documentType String @default("")
+  person String @default("")
   date DateTime
   recurrence String @default("Once")
   intervalDays Int?

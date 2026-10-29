@@ -1,0 +1,2 @@
+ALTER TABLE "Reminder" ADD COLUMN "documentType" TEXT NOT NULL DEFAULT '';
+ALTER TABLE "Reminder" ADD COLUMN "person" TEXT NOT NULL DEFAULT '';
