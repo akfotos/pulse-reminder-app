@@ -76,5 +76,5 @@ test('settings reject enabled email without a destination and preserve safe defa
   assert.equal(settings.emailEnabled, false);
   assert.equal(settings.weeklyDigest, false);
   assert.equal(settings.documentWarningDays, 180);
-  assert.equal(settings.theme, 'system');
+  assert.equal(settings.theme, 'light');
 });

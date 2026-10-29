@@ -14,7 +14,7 @@ export const settingsSchema = z.object({
   documentWarningDays: z.union([z.literal(30), z.literal(90), z.literal(180)]).default(180),
   dateFormat: z.enum(['MMM d, yyyy', 'dd/MM/yyyy', 'MM/dd/yyyy', 'yyyy-MM-dd']).default('MMM d, yyyy'),
   weekStartsOn: z.union([z.literal(0), z.literal(1)]).default(1),
-  theme: z.enum(['light', 'dark', 'system']).default('system'),
+  theme: z.enum(['light', 'dark', 'system']).default('light'),
   density: z.enum(['comfortable', 'compact']).default('comfortable'),
   reduceMotion: z.boolean().default(false),
   showAnalytics: z.boolean().default(true),
