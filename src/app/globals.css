@@ -101,3 +101,12 @@ body{font-size:15px}
 @media(max-width:800px){.reminder-date{width:110px}.list-columns{grid-template-columns:minmax(0,1fr) 120px 115px}}
 @media(max-width:640px){.reminder-date{display:none}.list-columns{grid-template-columns:minmax(0,1fr) 115px}.due-badge{white-space:normal;text-align:center;min-width:80px;max-width:110px}.search-field{min-width:0;flex:1 1 100%}.range-select{flex:1}.range-select select{width:100%}.stat-card{min-height:150px}.preferences-layout{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:480px){.analytics-metrics{grid-template-columns:minmax(0,1fr)}.analytics-metric{flex-direction:row;align-items:center}.analytics-metric>span>span{min-height:0}}
+
+/* Full-viewport layout — app fills the entire browser screen */
+body{background:var(--panel);background-image:none}
+.app-shell{margin:0;padding:0;border:0;border-radius:0;box-shadow:none;min-height:100vh;max-width:none}
+.sidebar{inset:0 auto 0 0;border-radius:0;border-right:1px solid var(--border)}
+.topbar{border-radius:0}
+main{border-radius:0;min-height:calc(100vh - 74px)}
+@media(min-width:1600px){.app-shell{margin:0;max-width:none}.sidebar{left:0;top:0;bottom:0}}
+@media(max-width:1200px){.sidebar{inset:0 auto 0 0}}
