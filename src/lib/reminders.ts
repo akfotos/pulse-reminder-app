@@ -2,7 +2,7 @@ import { differenceInCalendarDays, addDays, addYears, startOfDay } from 'date-fn
 import { z } from 'zod';
 
 export const categories = ['Birthday', 'Document', 'Health', 'Custom'] as const;
-export const documentTypes = ['Passport', "Driver's License", 'State ID', 'National ID', 'Visa', 'Certification', 'Insurance', 'Vehicle Registration', 'Other'] as const;
+export const documentTypes = ['Passport', "Driver's License", 'State ID', 'National ID', 'Visa', 'Certification', 'Other'] as const;
 export const healthTypes = ['Annual Physical', 'Dental Cleaning', 'Eye Exam', 'Vaccination', 'Medication Refill', 'Blood Work', 'Screening', 'Therapy', 'Other'] as const;
 export const reminderSchema = z.object({
   title: z.string().trim().min(1).max(200),
