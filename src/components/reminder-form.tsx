@@ -27,8 +27,10 @@ export function ReminderForm({ reminder, reminders = [], onSave, onDelete, defau
     const names = new Set<string>();
     reminders.forEach(r => {
       if (r.person) names.add(r.person);
-      const match = r.title.match(/^([^'’]{1,40})['’]s\b/);
-      if (match) names.add(match[1].trim());
+      if (r.category !== 'Document') {
+        const match = r.title.match(/^([^'’]{1,40})['’]s\b/);
+        if (match && !documentTypes.includes(match[1].trim() as typeof documentTypes[number])) names.add(match[1].trim());
+      }
     });
     return [...names];
   }, [reminders]);
